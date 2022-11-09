@@ -1,0 +1,15 @@
+{
+  "name": "grpctrab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "grpc": "^1.24.11"
+  }
+}

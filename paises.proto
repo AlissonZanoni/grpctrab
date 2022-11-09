@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+service PaisService {
+    rpc List (Empty) returns (ListPais) {}
+    rpc Insert (NewPais) returns (NewPais) {}
+}
+   
+message Empty {}
+
+message NewPais {
+    string id = 1;
+    string nome =2;
+    string sigla = 3;
+}
+
+message SucessoCadastro{
+    
+}
+
+message ListPais{
+    repeated NewPais newPais = 1;
+}
