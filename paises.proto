@@ -8,14 +8,18 @@ service PaisService {
 message requestListarTodos {}
 
 message requestCadastroPais {
-    string nome =1;
-    string sigla = 2;
+    int32 codigo =1;
+    string nome = 2;
+    string sigla = 3;
+    string moeda = 4;
 }
 
 message responseCadastroPais {
-    int32 id=1;
-    string nome=2;
-    string sigla=3;
+    int32 id     =1;
+    int32 codigo =2;
+    string nome  =3;
+    string sigla =4;
+    string moeda =5;
 } 
 
 message responseListarTodosPaises{
