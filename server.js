@@ -4,16 +4,23 @@ const paisProto = new grpc.load('paises.proto');
 const server = new grpc.Server();
 
 const paisDB = [
-    {id: '1', nome:'Brasil', sigla: 'BR'},
-    {id:'2', nome:'Italia', sigla: 'IT'}
+    {id: 1, nome:'Brasil', sigla: 'BR'},
+    {id:2, nome:'Italia', sigla: 'IT'}
 ]
+
+
+function insertPais(id,nome,sigla){
+    let res = {id: id, nome: nome, sigla: sigla};
+    return res;
+}
 
 server.addService(paisProto.PaisService.service,{
 
     insert: (call, callback) =>{
         let dadosPais = call.request;
-        paisDB.push(dadosPais);
-        callback(null,dadosPais);
+        let data = insertPais(paisDB.length+1,dadosPais.nome,dadosPais.sigla)
+        paisDB.push(data);
+        callback(null,data);
     },
 
     list: (_,callback) =>{

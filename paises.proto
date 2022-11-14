@@ -1,22 +1,23 @@
 syntax = "proto3";
 
 service PaisService {
-    rpc List (Empty) returns (ListPais) {}
-    rpc Insert (NewPais) returns (NewPais) {}
+    rpc List (requestListarTodos) returns (responseListarTodosPaises) {}
+    rpc Insert (requestCadastroPais) returns (responseCadastroPais) {}
 }
    
-message Empty {}
+message requestListarTodos {}
 
-message NewPais {
-    string id = 1;
-    string nome =2;
-    string sigla = 3;
+message requestCadastroPais {
+    string nome =1;
+    string sigla = 2;
 }
 
-message SucessoCadastro{
-    
-}
+message responseCadastroPais {
+    int32 id=1;
+    string nome=2;
+    string sigla=3;
+} 
 
-message ListPais{
-    repeated NewPais newPais = 1;
+message responseListarTodosPaises{
+    repeated responseCadastroPais _responseCadastroPais = 1;
 }
