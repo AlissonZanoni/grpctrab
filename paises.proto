@@ -3,8 +3,13 @@ syntax = "proto3";
 service PaisService {
     rpc List (requestListarTodos) returns (responseListarTodosPaises) {}
     rpc Insert (requestCadastroPais) returns (responseCadastroPais) {}
+    rpc Delete (requestDeletarPais) returns (responseListarTodosPaises) {}
 }
    
+message requestDeletarPais {
+    int32 id= 1;
+}
+
 message requestListarTodos {}
 
 message requestCadastroPais {

@@ -11,7 +11,15 @@ const paisDB = [
 
 function insertPais(id,codigo,nome,sigla,moeda){
     let res = {id: id,codigo: codigo, nome: nome, sigla: sigla, moeda: moeda};
-    return res;
+
+    for(let i=0; i<=paisDB.length-1;i++){
+        console.log(paisDB[i].codigo)
+        if(paisDB[i].codigo == codigo){
+            error = "er";
+            return error;
+        }
+     }
+     return res;
 }
 
 server.addService(paisProto.PaisService.service,{
@@ -19,8 +27,17 @@ server.addService(paisProto.PaisService.service,{
     insert: (call, callback) =>{
         let dadosPais = call.request;
         let data = insertPais(paisDB.length+1,dadosPais.codigo,dadosPais.nome,dadosPais.sigla,dadosPais.moeda)
-        paisDB.push(data);
-        callback(null,data);
+        if(data != 'er'){
+            paisDB.push(data);
+            callback(null,data);
+        }
+        else{
+            return callback({
+                code: 400,
+                message: "Código do país já cadastrado!",
+                status: grpc.status.INTERNAL
+              })
+        }
     },
 
     list: (_,callback) =>{
