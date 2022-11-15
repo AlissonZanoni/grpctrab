@@ -22,6 +22,22 @@ function insertPais(id,codigo,nome,sigla,moeda){
      return res;
 }
 
+function deletePais(id){
+    let res = {id: id}
+
+    for(let i=0; i<= paisDB.length-1;i++){
+        console.log(paisDB[i].id)
+        if(paisDB[i].id == id){
+            paisDB.splice(i,1)
+            return res;
+        }
+     }
+     res = "er";
+     return res;
+}
+
+
+
 server.addService(paisProto.PaisService.service,{
 
     insert: (call, callback) =>{
@@ -43,6 +59,22 @@ server.addService(paisProto.PaisService.service,{
     list: (_,callback) =>{
         callback(null,paisDB);
     },
+
+    delete: (call, callback) =>{
+        let idPais = call.request;
+        let data = deletePais(idPais.id)
+        if(data != 'er'){
+            callback(null,paisDB);
+        }
+        else{
+            return callback({
+                code: 400,
+                message: "País não encontrado!",
+                status: grpc.status.INTERNAL
+              })
+        }
+    },
+    
 
 })
 
